@@ -9,5 +9,5 @@ const app = express()
 
 // 3. listening for connections 
 app.listen(port, () => {
-    console.log("Server is running on port 3000");
+    console.log("Express server is running on port 3000");
 } )
