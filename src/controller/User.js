@@ -1,6 +1,6 @@
 // User controller containing code for the route
 const User = require("../model/User")   //import User from model
-const nodemailer = require('nodemailer')   //import nodemailer
+const { transporter } = require("../util/mailService")    //import transporter function from mailService in the Util folder
 const dotenv = require('dotenv')   //importing dotenv 
 const bcrypt = require("bcrypt")  //password hashing  
 const saltRounds = 10 //adding salt (10 digit charater to make the app more secure)
@@ -40,15 +40,6 @@ let createUser = async(req, res) => {
     }
 }
 
-//12. creating nodemailer transporter
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {                             //authorization
-        user: "mvillacs07@gmail.com",
-        pass: process.env.MAIL_PASSWORD
-    }
-})
-
 //13. sendVericationEmail function definition
 let sendVerificationEmail = async (user) => {
     //creating verification link from verification token
@@ -75,6 +66,7 @@ let sendVerificationEmail = async (user) => {
     //sending the mail using mailOptions
     try {
         transporter.sendMail(mailOptions)
+        console.log("Verification mail sent");
     } catch (error) {   //catch any error when sending mail
         console.error(error);
     }
