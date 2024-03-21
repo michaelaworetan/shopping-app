@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         country: String,
     },
     phoneNumber: { type: String, required: true },
-    // properties for user verification
+    // 10. properties for user verification
     isVerified: { type: Boolean, default: false }, //any user that will be created won't be verified by default
     verificationToken: { type: String, default: crypto.randomBytes(32).toString('hex') } //verify user we want it to be unique at all times using the crypto module
 })
